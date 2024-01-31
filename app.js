@@ -1,27 +1,54 @@
-const express = require("express");
-const mysql = require("mysql2");
+/*Author : Stefan Jovic
+Version: 1.0.0
+Date : 30.05.2021.
+*/
+
+
+// require 
+const express = require('express');
+const mysql = require('mysql2');
+const dotenv = require('dotenv');
+const path = require('path');
+
+// dotenv config
+dotenv.config({ path: './.env'});
 
 const app = express();
 
+// create connection to database
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'moviefy_user',
-    password: '0305',
-    database: 'moviefy-login'
+    host: process.env.DATABASE_HOST,
+    user: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASSWORD,
+    database: process.env.DATABASE
 });
 
+// define paths for public directory and set static files
+const publicDirectory = path.join(__dirname, 'public');
+app.use(express.static(publicDirectory));
+
+// set view engine
+app.set('view engine', 'ejs');
+
+// check connection to database
 db.connect(err => {
     if (err) {
-        console.log("Error connecting to database") + err.stack;
+        console.error('Error connecting to database', err);
         return;
     } 
-    console.log("Connected to database");
+    console.log('Connected to database');
 });
 
+// GET home page
 app.get("/", (req, res) => {
-    res.send("<h1>Homepage</h1>")
+    res.render('index');
 });
 
-app.listen(5001, () => {
-    console.log("Server started on Port 5001")
+app.get("/register", (req, res) => {
+    res.render('register');
+});
+
+// port 5001 
+app.listen(5501, () => {
+    console.log('Server started on Port 5501')
 });
