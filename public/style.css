@@ -23,6 +23,10 @@ form{
     width: 40% !important;
 }
 
+.login-form{
+    width: 40% !important;
+}
+
 .container-fluid {
     display: flex;
     justify-content: center;

@@ -27,8 +27,14 @@ const db = mysql.createConnection({
 const publicDirectory = path.join(__dirname, 'public');
 app.use(express.static(publicDirectory));
 
+// parse URL-encoded bodies (as sent by HTML forms)
+app.use(express.urlencoded({ extended: false}));
+// parse JSON bodies
+app.use(express.json());
+
 // set view engine
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 // check connection to database
 db.connect(err => {
@@ -39,14 +45,11 @@ db.connect(err => {
     console.log('Connected to database');
 });
 
-// GET home page
-app.get("/", (req, res) => {
-    res.render('index');
-});
 
-app.get("/register", (req, res) => {
-    res.render('register');
-});
+// Define routes
+app.use('/', require('./routes/pages'));
+app.use('/auth', require('./routes/auth'));
+
 
 // port 5001 
 app.listen(5501, () => {

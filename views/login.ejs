@@ -12,19 +12,27 @@
   </head>
   <body>
     <div class="container-fluid">
-        <form class="login-form">
+        <form class="login-form" action="/auth/login" method="POST">
             <h4 class="text-center">Login</h4>
             <div class="mb-3 mt-5">
               <label for="exampleInputEmail1" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+              <input type="email" class="form-control" name="emailLogin" id="exampleInputEmail1" aria-describedby="emailHelp" required>
             </div>
             <div class="mb-3">
               <label for="exampleInputPassword1" class="form-label">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" required>
+              <input type="password" class="form-control" name="passwordLogin" id="exampleInputPassword1" required>
               <div id="emailHelp" class="form-text">Forget password?</div>
             </div>
             <button type="submit" class="btn btn-primary">Login</button>
-            <div id="registration" class="text-center">Login</div>
+            <p class="text-center text-muted mt-5 mb-0">You dont have an account? <a href="#!"
+              class="fw-bold text-body"><u>Register here</u></a></p>
+            <% if (message) { %>
+              <div class="d-flex justify-content-center mt-3">
+                  <div class="alert alert-danger w-100 text-center" role="alert">
+                      <%= message %>
+                  </div>
+              </div>
+          <% } %>
         </form>
     </div>
 
