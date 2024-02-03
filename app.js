@@ -49,6 +49,7 @@ db.connect(err => {
 // Define routes
 app.use('/', require('./routes/pages'));
 app.use('/auth', require('./routes/auth'));
+app.use('/dashboard', require('./routes/dashboard'));
 
 
 // port 5001 

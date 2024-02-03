@@ -10,7 +10,7 @@ router.get('/register', (req, res) => {
 });
 
 router.get('/dashboard', (req, res) => {
-    res.render('dashboard', {user: req.user});
+    res.render('dashboard', {message: ''});
 });
 
 module.exports = router;
