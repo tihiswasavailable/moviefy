@@ -99,12 +99,12 @@ main {
     box-shadow: 0.2px 4px 5px rgba(0, 0, 0, 0.1);
     background-color: #fff;
     position: relative;
-    overflow: hidden; /*add*/
+    overflow: hidden; 
 }
 
 .movie img {
     width: 100%;
-    height: auto; /*add*/
+    height: auto; 
     object-fit: cover;
 }
 
@@ -159,3 +159,23 @@ main {
     transform: translateY(0);
     visibility: visible;
 }
+#tags {
+    display: flex;
+    width: 80%;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+}
+
+.tag{
+    color: #fff;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.tag:hover{
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: 0.3s;
+}
+
