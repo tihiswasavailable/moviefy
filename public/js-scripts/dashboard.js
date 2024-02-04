@@ -1,7 +1,7 @@
 // Purpose: To fetch the movie data from the API and display it on the dashboard page
 const API_KEY = 'ff68920a968c2d2dd9137d7879912b95';
 const BASE_URL = 'https://api.themoviedb.org/3';
-const API_URL = `${BASE_URL}/movie/popular?api_key=${API_KEY}`;
+const API_URL = `${BASE_URL}/discover/movie?sort_by=popularity.desc&api_key=${API_KEY}`;
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 const searchURL = `${BASE_URL}/search/movie?api_key=${API_KEY}`;
 
@@ -84,24 +84,34 @@ const genres = [
       "name":"Western"
     }
   ]
-
   
-
+// getElements from the dashboard.ejs file
 const main = document.getElementById('main');
 const form = document.getElementById('dashboard-form');
 const search = document.getElementById('search');
+const tagsElement = document.getElementById('tags');
 
+// execute the getMovies function to fetch the movie data from the API
 getMovies(API_URL);
-// fetch(API_URL)
+
+// execute the showGenres function to display the genres on the dashboard page
+showGenres();
+
+// function to fetch the movie data from the API
 function getMovies(url) {
     fetch(url)
     .then(res => res.json())
     .then(data => {
-        console.log(data.results);
-        showMovies(data.results);
+        console.log(data.results)
+        if(data.results.length !== 0){
+          showMovies(data.results);
+        } else {
+          main.innerHTML = `<h1 class="no-results"> No Results Found</h1>`
+      }
     })
 }
 
+// function to display the movie data on the dashboard page
 function showMovies(data) {
     main.innerHTML = '';
     data.forEach(movie => {
@@ -124,6 +134,7 @@ function showMovies(data) {
     })
 }
 
+// function to get the color of the vote average
 function getColor(vote) {
     if(vote >= 8) {
         return 'green';
@@ -134,6 +145,7 @@ function getColor(vote) {
     }
 }
 
+// function for the search bar
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     const searchTerm = search.value.trim();
@@ -144,3 +156,51 @@ form.addEventListener('submit', (e) => {
         getMovies(API_URL);
     }
 })
+
+// function to display the genres on the dashboard page
+var selectedGenre = [];
+function showGenres() {
+  tagsElement.innerHTML = '';
+  genres.forEach(genre => {
+    const t = document.createElement('div');
+    t.classList.add('tag');
+    t.id = genre.id;
+    t.innerText = genre.name;
+    t.addEventListener('click', () => {
+      if(selectedGenre.length == 0) {
+        selectedGenre.push(genre.id);
+      } else {
+        if(selectedGenre.includes(genre.id)) {
+          selectedGenre.forEach((id, idx) => {
+            if(id == genre.id) {
+              selectedGenre.splice(idx, 1);
+            }
+          })
+        } else {
+          selectedGenre.push(genre.id);
+        }
+      }
+      console.log(selectedGenre);
+      getMovies(API_URL+'&with_genres='+encodeURI(selectedGenre.join(',')))
+      highlightSelection();   
+  })
+  tagsElement.append(t);
+})
+}
+
+// function to highlight the selected genre
+function highlightSelection() {
+  console.log('highlightSelection function called');
+  const allTags = document.querySelectorAll('.tag');
+  console.log('allTags:', allTags);
+  allTags.forEach(tag => {
+    tag.classList.remove('highlight');
+  })
+  if(selectedGenre.length!=0) {
+    console.log('selectedGenre:', selectedGenre);
+    selectedGenre.forEach(id => {
+      const highlightedTag = document.getElementById(id);
+      highlightedTag.classList.add('highlight');
+    })
+  }
+}

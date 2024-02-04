@@ -179,3 +179,14 @@ main {
     transition: 0.3s;
 }
 
+.tag.highlight{
+    color : red;
+}
+
+.no-results {
+    color: #fff;
+    font-size: 2rem;
+    text-align: center;
+    margin-top: 2rem;
+}
+
