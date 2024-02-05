@@ -90,10 +90,13 @@ exports.login = (req, res) => {
                     message: 'Email or password is incorrect'
                 });
             }
+            
             const id = user.userId;
+            console.log("id: ", id);
             const token = jwt.sign({ id: id }, process.env.JWT_SECRET, {
                 expiresIn: process.env.JWT_EXPIRES_IN
             });
+            console.log("Token: ", token);
             const cookieOptions = {
                 expires: new Date (
                     Date.now() + 90 * 24 * 60 * 60 * 1000),
@@ -105,3 +108,11 @@ exports.login = (req, res) => {
     });
 };
 
+// logic for logout
+exports.logout = (req, res) => {
+    console.log('Logging out, current JWT cookie:', req.cookies.jwt);
+    // set the cookie to expire in 1 second from logout
+    res.cookie('jwt', '', { expires: new Date(Date.now() +1 ), httpOnly: true });
+    console.log('JWT cookie cleared.');
+    res.status(200).redirect('/login');
+};

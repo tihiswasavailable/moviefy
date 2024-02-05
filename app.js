@@ -9,6 +9,7 @@ const express = require('express');
 const mysql = require('mysql2');
 const dotenv = require('dotenv');
 const path = require('path');
+const cookieParser = require('cookie-parser');
 
 // dotenv config
 dotenv.config({ path: './.env'});
@@ -31,6 +32,9 @@ app.use(express.static(publicDirectory));
 app.use(express.urlencoded({ extended: false}));
 // parse JSON bodies
 app.use(express.json());
+// cookie parser
+app.use(cookieParser());
+
 
 // set view engine
 app.set('view engine', 'ejs');

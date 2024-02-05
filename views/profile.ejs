@@ -11,12 +11,32 @@
     <title>Registration</title>
   </head>
     <body>
+        <header>
+            <nav class="navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="/dashboard" class="nav-link">Dashboard</a>
+                    </li>
+                    <li class="nav-item" >
+                        <a href="/profile" class="nav-link">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/auth/logout" class="nav-link">Logout</a>
+                    </li>
+                </ul>
+                <% if (showSearchForm) { %>
+                <form class="dashboard-form" id="dashboard-form">
+                    <input type="text" id="search" placeholder="Search" class="search">
+                </form>
+                <% } %>
+            </nav>
+        </header>
         <div class="container-fluid">
             <form class="form-shared register-form" action="/auth/register" method="POST">
-                <h4 class="text-center">Registration</h4>
+                <h4 class="text-center">Profile Settings</h4>
                 <div class="mb-3 mt-5">
                     <input type="text" name="name" value="<%= typeof name != 'undefined' ? name: '' %>" id="form3Example1cg" class="form-control form-control-lg" required/>
-                    <label class="form-label" for="form3Example1cg">Your Name</label>
+                    <label class="form-label" for="form3Example1cg">Name</label>
                 </div>
                 <div class="mb-3">
                     <input type="email" name="email" value="<%= typeof email != 'undefined' ? email: '' %>" id="form3Example3cg" class="form-control form-control-lg" required/>
@@ -30,17 +50,11 @@
                     <input type="password" name="passwordConfirm" id="form3Example4cdg" class="form-control form-control-lg" required/>
                     <label class="form-label" for="form3Example4cdg">Repeat your password</label>
                 </div>
-                <div class="form-check d-flex justify-content-center mb-5">
-                    <input class="form-check-input me-2" type="checkbox" name="acceptTerms" value="accepted" id="form2Example3cg" required/>
-                    <label class="form-check-label" for="form2Example3g">
-                        I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
-                    </label>
-                </div>
                 <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-primary">Register</button>
+                    <button type="submit" class="btn btn-primary">Update data</button>
                 </div>
-                    <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="/login"
-                    class="fw-bold text-body"><u>Login here</u></a></p>
+                    <p class="text-center text-muted mt-5 mb-0">You want to delete your account?<a href="/register"
+                    class="fw-bold text-body"><u>Delete account!</u></a></p>
                     <% if (message) { %>
                         <div class="d-flex justify-content-center mt-3" id="message-container">
                             <div class="alert alert-danger w-100 text-center" role="alert">
