@@ -56,9 +56,6 @@ app.use('/', require('./routes/pages'));
 app.use('/auth', require('./routes/auth'));
 app.use('/profile', require('./routes/profile'));
 
-// app.get('/test', verifyToken, (req, res) => {
-//     res.send('Middleware test passed.');
-//   });
 
 // port 5001 
 app.listen(5501, () => {
