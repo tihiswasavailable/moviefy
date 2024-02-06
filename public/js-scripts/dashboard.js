@@ -102,7 +102,7 @@ function getMovies(url) {
     fetch(url)
     .then(res => res.json())
     .then(data => {
-        console.log(data.results)
+        //console.log(data.results)
         if(data.results.length !== 0){
           showMovies(data.results);
         } else {
@@ -116,7 +116,7 @@ function showMovies(data) {
     main.innerHTML = '';
     data.forEach(movie => {
         const {title, poster_path, vote_average, overview} = movie;
-        console.log(vote_average, getColor(vote_average));
+        //console.log(vote_average, getColor(vote_average));
         const movieElement = document.createElement('div');
         movieElement.classList.add('movie');
         movieElement.innerHTML = 
