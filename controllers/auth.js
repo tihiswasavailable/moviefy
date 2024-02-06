@@ -90,18 +90,19 @@ exports.login = (req, res) => {
                     message: 'Email or password is incorrect'
                 });
             }
-            
             const id = user.userId;
             console.log("id: ", id);
             const token = jwt.sign({ id: id }, process.env.JWT_SECRET, {
                 expiresIn: process.env.JWT_EXPIRES_IN
             });
             console.log("Token: ", token);
+            console.log('Authentization Header: ', req.headers.authorization);
             const cookieOptions = {
                 expires: new Date (
                     Date.now() + 90 * 24 * 60 * 60 * 1000),
                 httpOnly: true
             }
+            console.log("Cookie options: ", cookieOptions);
             res.cookie('jwt', token, cookieOptions);
             res.status(200).redirect('/dashboard');
         }

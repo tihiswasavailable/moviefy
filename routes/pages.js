@@ -15,10 +15,4 @@ router.get('/dashboard', (req, res) => {
         showSearchForm: true});
 });
 
-router.get('/profile', (req, res) => {
-    res.render('profile', {
-        message: '',
-        showSearchForm: false});
-});
-
 module.exports = router;

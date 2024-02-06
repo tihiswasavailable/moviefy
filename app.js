@@ -11,6 +11,7 @@ const dotenv = require('dotenv');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 
+
 // dotenv config
 dotenv.config({ path: './.env'});
 
@@ -53,7 +54,11 @@ db.connect(err => {
 // Define routes
 app.use('/', require('./routes/pages'));
 app.use('/auth', require('./routes/auth'));
+app.use('/profile', require('./routes/profile'));
 
+// app.get('/test', verifyToken, (req, res) => {
+//     res.send('Middleware test passed.');
+//   });
 
 // port 5001 
 app.listen(5501, () => {
