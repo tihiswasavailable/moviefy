@@ -22,8 +22,8 @@ exports.verifyToken = (req, res, next) => {
             // if the token is verified, the user object is added to the request object
             // next() is called to pass the request
             req.user = decoded;
-            //console.log('User:', decoded);
-            //console.log('Token verified');
+            console.log('User:', decoded);
+            console.log('Token verified');
             return next();
         });
     } else {

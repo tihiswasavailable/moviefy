@@ -98,7 +98,7 @@ exports.login = (req, res) => {
             const token = jwt.sign({ id: id }, process.env.JWT_SECRET, {
                 expiresIn: process.env.JWT_EXPIRES_IN
             });
-            //console.log("Token: ", token);
+            console.log("Token: ", token);
             //console.log('Authentization Header: ', req.headers.authorization);
             const cookieOptions = {
                 expires: new Date (
