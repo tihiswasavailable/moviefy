@@ -115,7 +115,7 @@ exports.login = (req, res) => {
 // logic for logout
 // clearing the cookie with the token upon logout and redirecting the user to the login page
 exports.logout = (req, res) => {
-    console.log('Logging out, current JWT cookie:', req.cookies.jwt);
+    //console.log('Logging out, current JWT cookie:', req.cookies.jwt);
     // set the cookie to expire in 1 second from logout
     res.cookie('jwt', '', { expires: new Date(Date.now() +1 ), httpOnly: true });
     //console.log('JWT cookie cleared.');

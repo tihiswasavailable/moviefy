@@ -80,3 +80,29 @@ exports.updateProfile = async (req, res) => {
         });
     }
 }
+
+// delete user profile
+// using the user's id from the token to delete the user's profile from the database
+// exports.deleteProfile = (req, res) => {
+//     console.log('deleteProfile');
+//     const userId = req.user.id;
+//     console.log(userId);
+
+//     if(!userId) {
+//         return res.render('profile', {
+//             message: 'User not found',
+//             showSearchForm: false
+//         });
+//     }
+//     db.query('DELETE FROM users WHERE userId = ?', [userId], (error, results) => {
+//         if (error) {
+//             console.log(error);
+//             return res.render('profile', {
+//                 message: 'Error deleting user profile',
+//                 showSearchForm: false
+//             });
+//         }
+//         res.cookie('jwt', '', { expires: new Date(Date.now() +1 ), httpOnly: true });
+//         res.status(200).redirect('/logout');
+//         });
+//     }

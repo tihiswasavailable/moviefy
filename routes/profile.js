@@ -8,5 +8,6 @@ router.use(authMiddleware.verifyToken);
 
 router.get('/', profileController.getProfile);
 router.post('/update', profileController.updateProfile);
+// router.post('/delete', profileController.deleteProfile);
 
 module.exports = router;
